@@ -1,6 +1,6 @@
 import type { HPCharacter } from '../types/hp.types';
 
-const API_URL = 'https://hp-api.onrender.com/api/demo';
+const API_URL = 'https://hp-api.onrender.com/api';
 
 export async function getCharacters(): Promise<HPCharacter[]> {
     const response = await fetch(`${API_URL}/characters`);
