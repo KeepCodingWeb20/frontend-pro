@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Quidditch Champions — v0 (sin bundler)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <h1 id="app">Cargando...</h1>
+    <p class="hint">Frontend al estilo 2010 — sin bundler, sin módulos, sin transpilación.</p>
+  </main>
+
+  <!-- ⚠️ El orden importa: utils ANTES que random ANTES que app -->
+  <script src="utils.js"></script>
+  <script src="random.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
