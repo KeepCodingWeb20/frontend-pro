@@ -5,8 +5,10 @@
   "directories": {
     "doc": "docs"
   },
+  "source": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "parcel build",
+    "dev": "parcel"
   },
   "repository": {
     "type": "git",
