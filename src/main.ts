@@ -20,11 +20,21 @@ function renderCharacters(characters: HPCharacter[]): void {
     const list = document.querySelector<HTMLUListElement>('#characters');
     if (!list) throw new Error('No se encontró #characters');
 
+    // TODO: Amplia esta función para pintar la imagen ANTES de cada elemento LI
+
     list.replaceChildren();
 
     for (const character of characters) {
         const li = document.createElement('li');
         li.textContent = `${character.name} - ${character.house || 'Sin Casa' }`;
+
+        // Foto:
+        const img = document.createElement('img');
+        img.src = character.image;
+        img.alt = character.name;
+        img.width = 50;
+        li.prepend(img);
+
         list.appendChild(li);
     }
 
@@ -38,7 +48,7 @@ async function main() { // bootstrap()
         // console.log(characters);
         app!.textContent = `${greet('Hermione')} - ${characters.length} personajes cargados`;
 
-        renderCharacters(characters);
+        renderCharacters(characters.filter(i => i.image).slice(0, 20));
     } catch(ex: unknown) {
         let mensaje = 'Error al cargar personajes';
 
