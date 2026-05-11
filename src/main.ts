@@ -10,9 +10,21 @@ app.textContent = `${greet('Hermione')} - cargando personajes...`;
 
 
 async function main() { // bootstrap()
-    const characters = await getCharacters();
-    // console.log(characters);
-    app!.textContent = `${greet('Hermione')} - ${characters.length} personajes cargados`;
+    // TODO: verifica que la api funciona y en caso que no sea así, muestra un mensaje de Error
+    try {
+        const characters = await getCharacters();
+        // console.log(characters);
+        app!.textContent = `${greet('Hermione')} - ${characters.length} personajes cargados`;
+    } catch(ex: unknown) {
+        let mensaje = 'Error al cargar personajes';
+
+        if (ex instanceof Error) {
+            mensaje = ex.message;
+        }
+
+        app!.textContent = `🚨ERROR: ${mensaje}`;
+        console.error(ex);
+    }
 }
 
 main();
