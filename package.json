@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/KeepCodingWeb20/frontend-pro#readme",
   "devDependencies": {
-    "parcel": "^2.16.4"
+    "parcel": "^2.16.4",
+    "typescript": "^6.0.3"
   }
 }
