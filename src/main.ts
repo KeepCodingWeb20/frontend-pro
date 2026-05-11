@@ -1,12 +1,34 @@
 import { greet } from './utils';
 import { pickRandomHouse } from './random';
 import { getCharacters } from './services/hp-api';
+import type { HPCharacter } from './types/hp.types';
+
+// textContent + createElement
 
 const app = document.querySelector<HTMLHeadingElement>('#app');
 // Null-safe control
 if (!app) throw new Error('No se encontró #app');
 // app.textContent = 'Bienvenidos a Quidditch Champions XX';
 app.textContent = `${greet('Hermione')} - cargando personajes...`;
+
+// TODO: 
+// una función renderCharacters 
+// reciba todos los personajes
+// localice la lista en el dom
+// inserte los elementos de los personajes
+function renderCharacters(characters: HPCharacter[]): void {
+    const list = document.querySelector<HTMLUListElement>('#characters');
+    if (!list) throw new Error('No se encontró #characters');
+
+    list.replaceChildren();
+
+    for (const character of characters) {
+        const li = document.createElement('li');
+        li.textContent = `${character.name} - ${character.house || 'Sin Casa' }`;
+        list.appendChild(li);
+    }
+
+}
 
 
 async function main() { // bootstrap()
@@ -15,6 +37,8 @@ async function main() { // bootstrap()
         const characters = await getCharacters();
         // console.log(characters);
         app!.textContent = `${greet('Hermione')} - ${characters.length} personajes cargados`;
+
+        renderCharacters(characters);
     } catch(ex: unknown) {
         let mensaje = 'Error al cargar personajes';
 
