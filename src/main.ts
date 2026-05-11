@@ -11,12 +11,24 @@ if (!app) throw new Error('No se encontró #app');
 // app.textContent = 'Bienvenidos a Quidditch Champions XX';
 app.textContent = `${greet('Hermione')} - cargando personajes...`;
 
+
+type RenderOptions = {
+    house?: string;
+    limit?: number;
+    // TODO: implementa una propiedad image: boolean
+    // en caso que este rellenada:
+    // 1. filtramos los elementos con imagen
+    // 2. añadimos las imagenes
+    // En cualquier otro caso, no aplicamos ese filtro
+}
+
+
 // TODO: 
 // una función renderCharacters 
 // reciba todos los personajes
 // localice la lista en el dom
 // inserte los elementos de los personajes
-function renderCharacters(characters: HPCharacter[]): void {
+function renderCharacters(characters: HPCharacter[], options: RenderOptions = {}): void {
     const list = document.querySelector<HTMLUListElement>('#characters');
     if (!list) throw new Error('No se encontró #characters');
 
@@ -24,7 +36,21 @@ function renderCharacters(characters: HPCharacter[]): void {
 
     list.replaceChildren();
 
-    for (const character of characters) {
+    // Filters
+    let filtered = characters;
+    filtered = filtered.filter(i => i.image);
+
+    if (options.house) {
+        filtered = filtered.filter(i => i.house === options.house);
+    }
+
+    if (options.limit) {
+        filtered = filtered.slice(0, options.limit);
+    }
+
+    // End Filters
+
+    for (const character of filtered) {
         const li = document.createElement('li');
         li.textContent = `${character.name} - ${character.house || 'Sin Casa' }`;
 
@@ -48,7 +74,7 @@ async function main() { // bootstrap()
         // console.log(characters);
         app!.textContent = `${greet('Hermione')} - ${characters.length} personajes cargados`;
 
-        renderCharacters(characters.filter(i => i.image).slice(0, 20));
+        renderCharacters(characters, { limit: 20, house: 'Slytherin' });
     } catch(ex: unknown) {
         let mensaje = 'Error al cargar personajes';
 
