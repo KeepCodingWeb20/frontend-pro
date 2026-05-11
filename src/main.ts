@@ -1,6 +1,18 @@
 import { greet } from './utils';
 import { pickRandomHouse } from './random';
+import type { HPCharacter } from './types/hp.types';
 
+async function loadData(): Promise<HPCharacter[]> {
+    const res = await fetch('https://hp-api.onrender.com/api/characters');
+    return res.json();
+}
+
+async function boostrap() {
+    const data = await loadData();
+    console.log(data[0]?.image);
+}
+
+boostrap();
 
 const app = document.querySelector<HTMLHeadingElement>('#app');
 // Null-safe control
