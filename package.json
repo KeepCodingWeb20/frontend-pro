@@ -1,0 +1,27 @@
+{
+  "name": "frontend-pro",
+  "version": "1.0.0",
+  "description": "<div align=\"center\">     <img src=\"https://keepcoding.io/wp-content/uploads/2024/11/Logo-kc237.svg\" alt=\"KeepCoding Web Bootcamp XX - Frontend PRO\"> </div>",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeepCodingWeb20/frontend-pro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/KeepCodingWeb20/frontend-pro/issues"
+  },
+  "homepage": "https://github.com/KeepCodingWeb20/frontend-pro#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  }
+}
