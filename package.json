@@ -2,7 +2,6 @@
   "name": "frontend-pro",
   "version": "1.0.0",
   "description": "<div align=\"center\">     <img src=\"https://keepcoding.io/wp-content/uploads/2024/11/Logo-kc237.svg\" alt=\"KeepCoding Web Bootcamp XX - Frontend PRO\"> </div>",
-  "main": "index.js",
   "directories": {
     "doc": "docs"
   },
