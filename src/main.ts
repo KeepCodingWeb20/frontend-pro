@@ -2,7 +2,7 @@ import { greet } from './utils';
 import { pickRandomHouse } from './random';
 import { getCharacters } from './services/hp-api';
 import type { HPCharacter } from './types/hp.types';
-
+import { Page } from './pages/Page';
 
 type RenderOptions = {
     house?: string;
@@ -84,3 +84,10 @@ async function load(): Promise<void> {
 
 load();
 
+// Identificar cual es el selector principal de HTML
+const app = document.querySelector<HTMLHeadingElement>('#app');
+if (!app) throw new Error('No se encontró #app');
+// Instanciar la clase correspondiente a la pagina
+const home = new Page(); // HomePage();
+// Llamar al método principal de esa pagina
+home.mount();

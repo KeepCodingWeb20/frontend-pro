@@ -8,3 +8,10 @@ export interface HPCharacter {
     alive: boolean;
     image: string;
 }
+
+
+export type CharacterState = 
+    | { status: 'idle' }
+    | { status: 'loading' }
+    | { status: 'success', data: HPCharacter[] }
+    | { status: 'error', message: string };
