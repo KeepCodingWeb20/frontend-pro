@@ -9,6 +9,12 @@ export interface HPCharacter {
     image: string;
 }
 
+export interface HPSpell {
+    id: string;
+    name: string;
+    description: string;
+}
+
 
 export type CharacterState = 
     | { status: 'idle' }
