@@ -33,5 +33,5 @@ export class Toast<TVariant extends ToastVariant> {
     }
 }
 
-const t = Toast.create<'error'>('error', 'Error llamando a la api');
-console.log(t.format());
+// const t = Toast.create<'error'>('error', 'Error llamando a la api');
+// console.log(t.format());

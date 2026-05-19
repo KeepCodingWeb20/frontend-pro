@@ -1,3 +1,5 @@
+import { Toast } from '../ui/Toast';
+
 export abstract class Page {
 
     abstract readonly slug: string;
@@ -11,7 +13,8 @@ export abstract class Page {
 
     async mount(): Promise<void> {
         document.title = this.title;
-        console.log(`[Page] mounting ${this.slug}`);
+        console.log(Toast.create<'info'>('info', `[Page] mounting ${this.slug}`).format());
+        // console.log(`[Page] mounting ${this.slug}`);
         await this.render();
     }
 
