@@ -1,4 +1,4 @@
-import { Page } from './pages/Page';
+import { HomePage } from './pages/HomePage';
 import { getCharacters } from './services/hp-api';
 
 
@@ -7,7 +7,7 @@ import { getCharacters } from './services/hp-api';
 const app = document.querySelector<HTMLHeadingElement>('#app');
 if (!app) throw new Error('No se encontró #app');
 // Instanciar la clase correspondiente a la pagina
-const home = new Page(app, getCharacters); // HomePage();
+const home = new HomePage(app, getCharacters); // HomePage();
 // Llamar al método principal de esa pagina
 home.mount();
 console.log('Loading home: ' + home.isLoading);
