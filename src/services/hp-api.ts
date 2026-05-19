@@ -7,14 +7,8 @@ const API_URL = 'https://hp-api.onrender.com/api';
 export type CharacterFetcher = () => Promise<HPCharacter[]>;
 export const getCharacters: CharacterFetcher = () => apiGet<HPCharacter[]>('/characters');
 
-// TODO2: Migra esta funcion
-export async function getSpells(): Promise<HPSpell[]> {
-    const response = await fetch(`${API_URL}/spells`);
-    if (!response.ok) {
-        throw new Error(`HTTP${response.status} - ${response.statusText}`);
-    }
-    return response.json();
-}
+export type SpellFetcher = () => Promise<HPSpell[]>;
+export const getSpells: SpellFetcher = () => apiGet<HPSpell[]>('/spells');
 
 // TODO2: Crea un método que devuelva todo el personal de Howards
 export async function getStaff(): Promise<HPCharacter[]> {

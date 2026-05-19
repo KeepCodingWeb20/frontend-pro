@@ -1,3 +1,4 @@
+import type { CharacterFetcher } from '../services/hp-api';
 import type { HPCharacter, CharacterState } from '../types/hp.types';
 import { Page } from './Page';
 
@@ -5,8 +6,6 @@ type RenderOptions = {
     house?: string;
     limit?: number;
 }
-
-type CharacterFetcher = () => Promise<HPCharacter[]>;
 
 export class HomePage extends Page {
 
