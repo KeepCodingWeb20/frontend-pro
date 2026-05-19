@@ -66,6 +66,11 @@ function renderCharacters(characters: HPCharacter[], options: RenderOptions = {}
 
 }
 
+// TODO:
+// Implementa una gestión de estados
+// Debemos implementar un tipo CharacterState que controle 4 tiempos: 'idle', 'loading', 'success', 'error';
+// En función de cada tipo, renderCharacters debe mostrar un mensaje personalizado
+
 
 async function main() { // bootstrap()
     // TODO: verifica que la api funciona y en caso que no sea así, muestra un mensaje de Error
