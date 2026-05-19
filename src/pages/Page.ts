@@ -1,4 +1,3 @@
-import { getCharacters } from '../services/hp-api';
 import type { HPCharacter, CharacterState } from '../types/hp.types';
 
 type RenderOptions = {
@@ -6,17 +5,20 @@ type RenderOptions = {
     limit?: number;
 }
 
+type CharacterFetcher = () => Promise<HPCharacter[]>;
+
 export class Page {
+
+    static readonly DEFAULT_LIMIT = 10; // Propiedades de clase o estáticas
 
     private slug: string = '/';
     private title: string = 'Quidditch Champions - Home';
-    private readonly root: HTMLElement;
     private state: CharacterState;
 
     constructor(
-        root: HTMLElement
+        private readonly root: HTMLElement, // Parameter property
+        private readonly fetcher: CharacterFetcher, // Inyección de dependencias
     ) {
-        this.root = root;
         this.state = { status: 'idle' };
     }
 
@@ -32,6 +34,11 @@ export class Page {
                 break;
         }
     };
+
+    // getters y setters
+    get isLoading(): boolean {
+        return this.state.status === 'loading';
+    }
 
     private renderCharacters(characters: HPCharacter[], options: RenderOptions = {}): void {
     const list = document.querySelector<HTMLUListElement>('#characters');
@@ -78,7 +85,7 @@ export class Page {
         this.state = { status: 'loading' };
         this.render();
         try {
-            const data = await getCharacters();
+            const data = await this.fetcher();
             this.state = { status: 'success', data: data };
         } catch (e: unknown) {
             this.state = { status: 'error', message: e instanceof Error ? e.message : 'Unknown error' }
