@@ -3,31 +3,35 @@ import { pickRandomHouse } from './random';
 import { getCharacters } from './services/hp-api';
 import type { HPCharacter } from './types/hp.types';
 
-// textContent + createElement
-
-const app = document.querySelector<HTMLHeadingElement>('#app');
-// Null-safe control
-if (!app) throw new Error('No se encontró #app');
-// app.textContent = 'Bienvenidos a Quidditch Champions XX';
-app.textContent = `${greet('Hermione')} - cargando personajes...`;
-
 
 type RenderOptions = {
     house?: string;
     limit?: number;
-    // TODO: implementa una propiedad image: boolean
-    // en caso que este rellenada:
-    // 1. filtramos los elementos con imagen
-    // 2. añadimos las imagenes
-    // En cualquier otro caso, no aplicamos ese filtro
 }
 
+type CharacterState = 
+    | { status: 'idle' }
+    | { status: 'loading' }
+    | { status: 'success', data: HPCharacter[] }
+    | { status: 'error', message: string };
 
-// TODO: 
-// una función renderCharacters 
-// reciba todos los personajes
-// localice la lista en el dom
-// inserte los elementos de los personajes
+let state: CharacterState = { status: 'idle' };
+
+function render(): void {
+    const app = document.querySelector<HTMLHeadingElement>('#app');
+    if (!app) return;
+
+    switch (state.status) {
+        case 'idle':    app.textContent = 'Pendiente invocar API HP'; break;
+        case 'loading': app.textContent = 'Cargando personajes...'; break;
+        case 'error':   app.textContent = `ERROR: ${state.message}`; break;
+        case 'success':
+            app.textContent = `${state.data.length} personajes cargados`;
+            renderCharacters(state.data);
+            break;
+    }
+};
+
 function renderCharacters(characters: HPCharacter[], options: RenderOptions = {}): void {
     const list = document.querySelector<HTMLUListElement>('#characters');
     if (!list) throw new Error('No se encontró #characters');
@@ -66,36 +70,17 @@ function renderCharacters(characters: HPCharacter[], options: RenderOptions = {}
 
 }
 
-// TODO:
-// Implementa una gestión de estados
-// Debemos implementar un tipo CharacterState que controle 4 tiempos: 'idle', 'loading', 'success', 'error';
-// En función de cada tipo, renderCharacters debe mostrar un mensaje personalizado
-
-
-async function main() { // bootstrap()
-    // TODO: verifica que la api funciona y en caso que no sea así, muestra un mensaje de Error
+async function load(): Promise<void> {
+    state = { status: 'loading' };
+    render();
     try {
-        const characters = await getCharacters();
-        // console.log(characters);
-        app!.textContent = `${greet('Hermione')} - ${characters.length} personajes cargados`;
-
-        renderCharacters(characters, { limit: 20, house: 'Slytherin' });
-    } catch(ex: unknown) {
-        let mensaje = 'Error al cargar personajes';
-
-        if (ex instanceof Error) {
-            mensaje = ex.message;
-        }
-
-        app!.textContent = `🚨ERROR: ${mensaje}`;
-        console.error(ex);
+        const data = await getCharacters();
+        state = { status: 'success', data: data };
+    } catch (e: unknown) {
+        state = { status: 'error', message: e instanceof Error ? e.message : 'Unknown error' }
     }
+    render();
 }
 
-main();
+load();
 
-// TODO:
-// Crear un módulo src/random.ts con una función pickRandomHouse() que:
-// 1. Devuelva una de las4 casas al azar
-// 2. Tiene que estar tipado de manera estricta <---
-// 3. Importar esa función
