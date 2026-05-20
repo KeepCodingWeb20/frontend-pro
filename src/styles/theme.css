@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+
+/* Design system
+    CSS TOKENS
+*/
 @theme {
     --color-gryffindor: #7f0909;
     --color-slytherin:  #1a472a;

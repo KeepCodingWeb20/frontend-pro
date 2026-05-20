@@ -10,9 +10,16 @@ export function renderCharacter(character: Character): HTMLElement {
 
     card.className = 'flex gap-3 p-4 rounder-lg bg-white shadow-sm border-l-4 hover:shadow-md transition-shadow cursor-pointer';
 
+    // TODO
+    // With 16*
+    //. Height 16*
+    // Border radius 50%
+    // Object-fit COVER
+    // Flex shrink: 0
     const img = document.createElement('img');
     img.src = character.image;
     img.alt = character.name;
+    img.className = 'w-16 h-16 rounded-full object-cover flex-shrink-0'
     card.append(img);
 
     // Nombre h3
