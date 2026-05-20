@@ -25,8 +25,10 @@
   },
   "homepage": "https://github.com/KeepCodingWeb20/frontend-pro#readme",
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
     "parcel": "^2.16.4",
     "rimraf": "^6.1.3",
+    "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3"
   }
 }

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+    --color-gryffindor: #7f0909;
+    --color-slytherin:  #1a472a;
+    --color-ravenclaw:  #0e1a40;
+    --color-hufflepuff: #ecb939;
+
+    --color-bg: #fafafa;
+    --color-fg: #1a1a1a;
+    --color-muted: #6b6280;
+}
