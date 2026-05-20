@@ -8,7 +8,7 @@ import type { Character } from '../types/domain.types';
 export function renderCharacter(character: Character): HTMLElement {
     const card = document.createElement('article');
 
-    card.className = 'flex gap-3 p-4 rounder-lg bg-white shadow-sm border-l-4 hover:shadow-md transition-shadow cursor-pointer';
+    card.className = 'character-card flex gap-3 p-4 rounder-lg bg-white shadow-sm border-l-4 hover:shadow-md transition-shadow cursor-pointer';
 
     // TODO
     // With 16*
@@ -37,7 +37,7 @@ export function renderCharacter(character: Character): HTMLElement {
     // Texto RIP si no alive 'p' -> clase 'rip'
     if (!character.alive) {
         const rip = document.createElement('p');
-        rip.className = 'rip';
+        rip.className = 'rip character-card__rip';
         rip.textContent = 'RIP';
         card.append(rip);
     }

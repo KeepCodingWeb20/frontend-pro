@@ -14,3 +14,21 @@
     --color-fg: #1a1a1a;
     --color-muted: #6b6280;
 }
+
+@layer components {
+    .character-card {
+        & img {
+            border-radius: 50%;
+        }
+
+        & h3 {
+            font-weight: 600;
+        }
+
+        /* Los personajes muertos se oscurecen */
+        &:has(.character-card__rip) {
+            opacity: 0.6;
+            filter: grayscale(30%)
+        }
+    }
+}
