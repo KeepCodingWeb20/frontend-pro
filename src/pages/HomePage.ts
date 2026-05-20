@@ -2,6 +2,7 @@ import type { CharacterFetcher } from '../services/hp-api';
 import type { Character } from '../types/domain.types';
 import { renderCharacter } from '../ui/character-card';
 import { renderCharacterList } from '../ui/character-list';
+import { renderError, renderLoading } from '../ui/states';
 import { Page } from './Page';
 
 type RenderOptions = {
@@ -31,11 +32,11 @@ export class HomePage extends Page {
     }
 
     private paint(): Promise<void> | void {
-
+        this.root.replaceChildren();
         switch (this.state.status) {
             case 'idle':    this.root.textContent = 'Pendiente invocar API HP'; break;
-            case 'loading': this.root.textContent = 'Cargando personajes...'; break;
-            case 'error':   this.root.textContent = `ERROR: ${this.state.message}`; break;
+            case 'loading': this.root.append(renderLoading('Cargando personajes...')); break;
+            case 'error':   this.root.append(renderError(this.state.message)); break;
             case 'success':
                 this.root.textContent = `${this.state.data.length} personajes cargados`;
                 this.root.replaceChildren();
