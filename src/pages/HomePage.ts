@@ -1,5 +1,7 @@
 import type { CharacterFetcher } from '../services/hp-api';
+import type { Character } from '../types/domain.types';
 import type { HPCharacter, CharacterState } from '../types/hp.types';
+import { renderCharacter } from '../ui/character-card';
 import { Page } from './Page';
 
 type RenderOptions = {
@@ -40,7 +42,7 @@ export class HomePage extends Page {
         return this.state.status === 'loading';
     }
 
-    private renderCharacters(characters: HPCharacter[], options: RenderOptions = {}): void {
+    private renderCharacters(characters: Character[], options: RenderOptions = {}): void {
         const list = document.querySelector<HTMLUListElement>('#characters');
         if (!list) throw new Error('No se encontró #characters');
 
@@ -63,17 +65,7 @@ export class HomePage extends Page {
         // End Filters
 
         for (const character of filtered) {
-            const li = document.createElement('li');
-            li.textContent = `${character.name} - ${character.house || 'Sin Casa' }`;
-
-            // Foto:
-            const img = document.createElement('img');
-            img.src = character.image;
-            img.alt = character.name;
-            img.width = 50;
-            li.prepend(img);
-
-            list.appendChild(li);
+            list.appendChild(renderCharacter(character));
         }
 
     }

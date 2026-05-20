@@ -7,7 +7,7 @@ import type { Character } from '../types/domain.types';
 const API_URL = 'https://hp-api.onrender.com/api';
 
 // apiGEt generico. -> cada funcion lo llame.
-export type CharacterFetcher = () => Promise<HPCharacter[]>;
+export type CharacterFetcher = () => Promise<Character[]>;
 // TODO: consumir el mapper en getCharacters;
 //export const getCharacters: CharacterFetcher = () => apiGet<HPCharacter[]>('/characters');
 export async function getCharacters(): Promise<Character[]> {

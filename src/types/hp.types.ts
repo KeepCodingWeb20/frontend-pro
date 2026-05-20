@@ -1,6 +1,8 @@
 // Contrato de la api de Harry Potter
 // URL: https://hp-api.onrender.com/
 
+import type { Character } from './domain.types';
+
 // Interfaces
 
 // DTO
@@ -27,5 +29,5 @@ export interface HPSpell {
 export type CharacterState = 
     | { status: 'idle' }
     | { status: 'loading' }
-    | { status: 'success', data: HPCharacter[] }
+    | { status: 'success', data: Character[] }
     | { status: 'error', message: string };
