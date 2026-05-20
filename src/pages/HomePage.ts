@@ -19,7 +19,7 @@ export class HomePage extends Page {
 
     static readonly DEFAULT_LIMIT = 10; // Propiedades de clase o estáticas
 
-    readonly slug = '/';
+    readonly slug = 'home';
     readonly title = 'Quidditch Champions - Home';
     private state: State = { status: 'idle' };
 
