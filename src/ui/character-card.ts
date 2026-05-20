@@ -2,6 +2,7 @@
 // Recibe un Character
 
 import type { Character } from '../types/domain.types';
+import { getCSSVar, type ColorToken } from '../types/tokens';
 
 // Devuelve un Elemento HTML (componente) correspondiente a ese character
 // Acaba devolviendo una "CARD"
@@ -9,6 +10,15 @@ export function renderCharacter(character: Character): HTMLElement {
     const card = document.createElement('article');
 
     card.className = 'character-card flex gap-3 p-4 rounder-lg bg-white shadow-sm border-l-4 hover:shadow-md transition-shadow cursor-pointer';
+
+    // Definir el border color
+    // TODO:
+    // Conocer el valor de HOUSE
+    // Definir el "token" de color
+    // Aplicar borderLeftColor
+    const houeToken = `color-${character.house.toLowerCase()}` as ColorToken;
+    card.style.borderLeftColor = getCSSVar(houeToken);
+
 
     // TODO
     // With 16*
