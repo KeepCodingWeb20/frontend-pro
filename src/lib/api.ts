@@ -1,4 +1,4 @@
-const API_URL = 'https://hp-api.onrender.com/apii';
+const API_URL = 'https://hp-api.onrender.com/api';
 
 function wait(time = 1000): Promise<void> {
     return new Promise((res) => {

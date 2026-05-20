@@ -26,7 +26,14 @@ function navigate(): void {
     console.log({slug, page});
     if (page) {
         page.mount();
+    } else {
+        // Comportamiento 404
+        // LLegado este punto, no tenemos ninguna Page que haga match.
+        app?.replaceChildren(
+            document.createTextNode(`404 - pagina ${slug} no encontrada`)
+        );
     }
+
 }
 
 window.addEventListener('hashchange', navigate);
