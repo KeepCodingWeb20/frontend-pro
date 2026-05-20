@@ -24,10 +24,3 @@ export interface HPSpell {
     name: string;
     description: string;
 }
-
-
-export type CharacterState = 
-    | { status: 'idle' }
-    | { status: 'loading' }
-    | { status: 'success', data: Character[] }
-    | { status: 'error', message: string };

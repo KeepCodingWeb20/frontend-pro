@@ -1,7 +1,7 @@
 import type { CharacterFetcher } from '../services/hp-api';
 import type { Character } from '../types/domain.types';
-import type { HPCharacter, CharacterState } from '../types/hp.types';
 import { renderCharacter } from '../ui/character-card';
+import { renderCharacterList } from '../ui/character-list';
 import { Page } from './Page';
 
 type RenderOptions = {
@@ -9,13 +9,19 @@ type RenderOptions = {
     limit?: number;
 }
 
+type State = 
+    | { status: 'idle' }
+    | { status: 'loading' }
+    | { status: 'success', data: Character[] }
+    | { status: 'error', message: string };
+
 export class HomePage extends Page {
 
     static readonly DEFAULT_LIMIT = 10; // Propiedades de clase o estáticas
 
     readonly slug = '/';
     readonly title = 'Quidditch Champions - Home';
-    private state: CharacterState = { status: 'idle' };
+    private state: State = { status: 'idle' };
 
     constructor(
         root: HTMLElement, // Parameter property
@@ -32,7 +38,8 @@ export class HomePage extends Page {
             case 'error':   this.root.textContent = `ERROR: ${this.state.message}`; break;
             case 'success':
                 this.root.textContent = `${this.state.data.length} personajes cargados`;
-                this.renderCharacters(this.state.data);
+                this.root.replaceChildren();
+                this.root.appendChild(renderCharacterList(this.state.data.slice(0, HomePage.DEFAULT_LIMIT)));
                 break;
         }
     };
@@ -40,34 +47,6 @@ export class HomePage extends Page {
     // getters y setters
     get isLoading(): boolean {
         return this.state.status === 'loading';
-    }
-
-    private renderCharacters(characters: Character[], options: RenderOptions = {}): void {
-        const list = document.querySelector<HTMLUListElement>('#characters');
-        if (!list) throw new Error('No se encontró #characters');
-
-        // TODO: Amplia esta función para pintar la imagen ANTES de cada elemento LI
-
-        list.replaceChildren();
-
-        // Filters
-        let filtered = characters;
-        filtered = filtered.filter(i => i.image);
-
-        if (options.house) {
-            filtered = filtered.filter(i => i.house === options.house);
-        }
-
-        if (options.limit) {
-            filtered = filtered.slice(0, options.limit);
-        }
-
-        // End Filters
-
-        for (const character of filtered) {
-            list.appendChild(renderCharacter(character));
-        }
-
     }
 
     override async render(): Promise<void> {
