@@ -8,7 +8,7 @@ import type { Character } from '../types/domain.types';
 export function renderCharacter(character: Character): HTMLElement {
     const card = document.createElement('article');
 
-    card.className = 'character-card';
+    card.className = 'flex gap-3 p-4 rounder-lg bg-white shadow-sm border-l-4 hover:shadow-md transition-shadow cursor-pointer';
 
     const img = document.createElement('img');
     img.src = character.image;
@@ -18,11 +18,12 @@ export function renderCharacter(character: Character): HTMLElement {
     // Nombre h3
     const name = document.createElement('h3');
     name.textContent = character.name;
+    name.classList = 'font-semibold text-base';
     card.append(name);
 
     // House "p" -> clase 'house'
     const house = document.createElement('p');
-    house.className = 'house';
+    house.className = 'text-sm test-muted';
     house.textContent = character.house;
     card.append(house);
 
