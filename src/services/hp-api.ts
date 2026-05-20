@@ -5,6 +5,7 @@ const API_URL = 'https://hp-api.onrender.com/api';
 
 // apiGEt generico. -> cada funcion lo llame.
 export type CharacterFetcher = () => Promise<HPCharacter[]>;
+// TODO: consumir el mapper en getCharacters;
 export const getCharacters: CharacterFetcher = () => apiGet<HPCharacter[]>('/characters');
 
 export type SpellFetcher = () => Promise<HPSpell[]>;
