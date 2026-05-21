@@ -15,3 +15,11 @@ export interface Character {
     alive: boolean;
     image: string;
 }
+
+
+export const HOUSES: readonly House[] = [
+  'Gryffindor',
+  'Slytherin',
+  'Hufflepuff',
+  'Ravenclaw',
+];

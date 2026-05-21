@@ -1,56 +1,40 @@
-
-// Recibe un Character
-
 import type { Character } from '../types/domain.types';
-import { getCSSVar, type ColorToken } from '../types/tokens';
+import { type ColorToken, getCSSVar } from '../types/tokens';
 
-// Devuelve un Elemento HTML (componente) correspondiente a ese character
-// Acaba devolviendo una "CARD"
-export function renderCharacter(character: Character): HTMLElement {
-    const card = document.createElement('article');
+export function renderCharacterCard(character: Character): HTMLElement {
+  const houseToken = `color-${character.house.toLowerCase()}` as ColorToken;
 
-    card.className = 'character-card flex gap-3 p-4 rounder-lg bg-white shadow-sm border-l-4 hover:shadow-md transition-shadow cursor-pointer';
+  const card = document.createElement('article');
+  card.className = 'character-card flex gap-3 p-4 rounded-lg bg-white shadow-sm border-l-4';
+  card.style.borderLeftColor = getCSSVar(houseToken);
 
-    // Definir el border color
-    // TODO:
-    // Conocer el valor de HOUSE
-    // Definir el "token" de color
-    // Aplicar borderLeftColor
-    const houeToken = `color-${character.house.toLowerCase()}` as ColorToken;
-    card.style.borderLeftColor = getCSSVar(houeToken);
+  const img = document.createElement('img');
+  img.src = character.image;
+  img.alt = character.name;
+  img.loading = 'lazy';
+    img.className = 'w-16 h-16 rounded-full object-cover flex-shrink-0';
+  card.append(img);
 
+  const body = document.createElement('div');
+  body.className = 'character-card__body flex flex-col gap-1 flex-1';
 
-    // TODO
-    // With 16*
-    //. Height 16*
-    // Border radius 50%
-    // Object-fit COVER
-    // Flex shrink: 0
-    const img = document.createElement('img');
-    img.src = character.image;
-    img.alt = character.name;
-    img.className = 'w-16 h-16 rounded-full object-cover flex-shrink-0'
-    card.append(img);
+  const name = document.createElement('h3');
+  name.className = 'font-semibold text-base';
+  name.textContent = character.name;
+  body.append(name);
 
-    // Nombre h3
-    const name = document.createElement('h3');
-    name.textContent = character.name;
-    name.classList = 'font-semibold text-base';
-    card.append(name);
+  const house = document.createElement('p');
+  house.className = 'character-card__house text-sm text-muted';
+  house.textContent = character.house;
+  body.append(house);
 
-    // House "p" -> clase 'house'
-    const house = document.createElement('p');
-    house.className = 'text-sm test-muted';
-    house.textContent = character.house;
-    card.append(house);
+  if (!character.alive) {
+    const rip = document.createElement('p');
+    rip.className = 'character-card__rip';
+    rip.textContent = 'RIP';
+    body.append(rip);
+  }
 
-    // Texto RIP si no alive 'p' -> clase 'rip'
-    if (!character.alive) {
-        const rip = document.createElement('p');
-        rip.className = 'rip character-card__rip';
-        rip.textContent = 'RIP';
-        card.append(rip);
-    }
-
-    return card;
+  card.append(body);
+  return card;
 }

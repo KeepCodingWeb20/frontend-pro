@@ -12,6 +12,13 @@ export type ColorToken =
   | 'color-fg'
   | 'color-muted';
 
-export function getCSSVar(token: ColorToken): string {
-    return `var(--${token})`;
+export type SpacingToken =
+  | 'space-xs'
+  | 'space-sm'
+  | 'space-md'
+  | 'space-lg'
+  | 'space-xl';
+
+export function getCSSVar(token: ColorToken | SpacingToken): string {
+  return `var(--${token})`;
 }

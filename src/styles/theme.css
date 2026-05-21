@@ -1,34 +1,40 @@
 @import "tailwindcss";
 
+@theme static {
+  /* Casas de Hogwarts */
+  --color-gryffindor: #7f0909;
+  --color-slytherin:  #1a472a;
+  --color-ravenclaw:  #0e1a40;
+  --color-hufflepuff: #ecb939;
 
-/* Design system
-    CSS TOKENS
-*/
-@theme {
-    --color-gryffindor: #7f0909;
-    --color-slytherin:  #1a472a;
-    --color-ravenclaw:  #0e1a40;
-    --color-hufflepuff: #ecb939;
+  /* Colores semánticos */
+  --color-bg:    #fafafa;
+  --color-fg:    #1a1a1a;
+  --color-muted: #6b7280;
 
-    --color-bg: #fafafa;
-    --color-fg: #1a1a1a;
-    --color-muted: #6b6280;
+  /* Spacing semántico */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
 }
 
-@layer components {
-    .character-card {
-        & img {
-            border-radius: 50%;
-        }
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+  }
 
-        & h3 {
-            font-weight: 600;
-        }
+  :focus-visible {
+    outline: 2px solid var(--color-fg);
+    outline-offset: 2px;
+  }
 
-        /* Los personajes muertos se oscurecen */
-        &:has(.character-card__rip) {
-            opacity: 0.6;
-            filter: grayscale(30%)
-        }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #0a0a0a;
+      --color-fg: #fafafa;
     }
+  }
 }
